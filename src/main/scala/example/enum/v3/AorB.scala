@@ -1,18 +1,13 @@
 package example.enum.v3
 
-abstract sealed class AorB extends Enum[String] 
+sealed trait AorB extends Enum {type V = String}
 
-object AorB {
-  object A extends AorB {
+object AorB extends EnumCompanion[AorB] {
+  case object A extends AorB {
     override val value = "A"
   }
-  object B extends AorB {
+  case object B extends AorB {
     override val value = "B"
   }
-  def apply(v: String): AorB = v match {
-     case "A" => AorB.A
-     case "B" => AorB.B
-     // case _ => ...MatchError
-   }
-  def unapply(ab: AorB): Option[(String)] = Option(ab.value)
+  def apply(v: String) = applyEnum(v)
 }

@@ -1,12 +1,12 @@
 package example.enum.v2
 
-abstract sealed class AorB extends Enum[String]
+sealed trait AorB extends Enum[String]
 
 object AorB {
-  object A extends AorB {
+  case object A extends AorB {
     override val value = "A"
   }
-  object B extends AorB {
+  case object B extends AorB {
     override val value = "B"
   }
   def apply(v: String): AorB = v match {

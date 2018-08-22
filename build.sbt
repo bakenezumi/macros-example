@@ -12,4 +12,7 @@ lazy val root = (project in file(".")).
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       scalaTest % Test,
     ),
+    scalacOptions ++= Seq(
+      "-Ymacro-debug-lite"
+    )
   )

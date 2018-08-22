@@ -1,12 +1,13 @@
 package example.enum.v3
 
-import scala.language.experimental.macros
+import language.experimental.macros
 
-trait Enum[T] {
-  val value: T
-  Enum.valid[T]
+trait Enum {
+  type V
+  val value: V
 }
 
-object Enum {
-  implicit def valid[T]: Unit = macro EnumMacro.validImpl[T]
+trait EnumCompanion[E <: Enum] {
+  def unapply(e: E): Option[(E#V)] = Option(e.value)
+  def applyEnum(v: E#V): E = macro EnumMacro.applyEnumImpl[E, E#V]
 }
