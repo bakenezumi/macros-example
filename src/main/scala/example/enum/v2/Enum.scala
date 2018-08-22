@@ -1,3 +1,5 @@
 package example.enum.v2
 
-trait Enum
+trait Enum[T] {
+  val value: T
+}

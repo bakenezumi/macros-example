@@ -1,8 +1,6 @@
-package example.enum.v1
+package example.enum.v2
 
-abstract sealed class AorB {
-   val value: String
-}
+abstract sealed class AorB extends Enum[String]
 
 object AorB {
   object A extends AorB {
@@ -14,7 +12,7 @@ object AorB {
   def apply(v: String): AorB = v match {
      case "A" => AorB.A
      case "B" => AorB.B
-     // case _ => ...
+     // case _ => ...MatchError
    }
   def unapply(ab: AorB): Option[(String)] = Option(ab.value)
 }
