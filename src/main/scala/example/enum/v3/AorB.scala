@@ -1,6 +1,6 @@
 package example.enum.v3
 
-abstract sealed class AorB extends Enum[String]
+abstract sealed class AorB extends Enum[String] 
 
 object AorB {
   object A extends AorB {
