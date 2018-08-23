@@ -10,5 +10,4 @@ object AorB extends EnumCompanion[AorB] {
     override val value = "B"
   }
   def apply(v: String) = applyEnum(v)
-  validateEnum
 }
