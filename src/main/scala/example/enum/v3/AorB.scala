@@ -1,13 +1,13 @@
-package example.enum.v3
+package example.enum.v2
 
 sealed trait AorB extends Enum {type V = String}
 
 object AorB extends EnumCompanion[AorB] {
   case object A extends AorB {
-    override val value = "A"
+    val value = "A"
   }
   case object B extends AorB {
-    override val value = "B"
+    val value = "B"
   }
   def apply(v: String) = applyEnum(v)
 }
