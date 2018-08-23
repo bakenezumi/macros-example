@@ -6,13 +6,11 @@ object EnumMacro {
   def applyEnumImpl[E: c.WeakTypeTag, V: c.WeakTypeTag](c: blackbox.Context)(v: c.Expr[V]): c.Expr[E] = {
     import c.universe._
     val enumType = weakTypeOf[E]
-    val valuePropertyName = "value"
-    val thisMacroParamName = "v"
     val subclasses = enumType.typeSymbol.asClass.knownDirectSubclasses
     val cases = subclasses.map { classSymbol =>
       val subclassName = classSymbol.name.toString
       CaseDef(
-        Select(Ident(TermName(subclassName)), TermName(valuePropertyName)),
+        Select(Ident(TermName(subclassName)), TermName("value")),
         EmptyTree,
         Ident(TermName(subclassName))
       )
@@ -22,6 +20,6 @@ object EnumMacro {
     //   case Sub2.value => Sub2
     //   ...
     // }
-    c.Expr[E](Match(Ident(TermName(thisMacroParamName)), cases))
+    c.Expr[E](Match(Ident(TermName("v")), cases))
   }  
 }

@@ -4,12 +4,14 @@ import language.experimental.macros
 import scala.reflect.macros.blackbox.Context
 
 object HelloMacro {
-  def p(msg: String): Unit = macro pImpl
+  def hello(msg: String): Unit = macro helloImpl
 
-  def pImpl(c: Context)(msg: c.Expr[String]) = {
+  def helloImpl(c: Context)(msg: c.Expr[String]) = {
     import c.universe._
-    q"""
-        println("Hello, " + ${msg})
-      """
+    msg.tree match {
+      case Literal(Constant("A")) => q""" println("Hello, " + $msg) """
+      case Literal(Constant("B")) => q""" println("こんにちは, " + $msg) """
+      case _ => c.abort(c.enclosingPosition, "コンパイルエラー")
+    }
   }
 }
